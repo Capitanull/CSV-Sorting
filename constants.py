@@ -1,0 +1,16 @@
+hggsp = "HGGSP"
+hlp = "HLP"
+eppcs = "EPPCS"
+llcer = "LLCER"
+ses = "SES"
+svt = "SVT"
+maths = "MATHS"
+nsi = "NSI"
+pc = "PHYSIQUE-CHIMIE"
+arts = "ARTS-PLASTIQUES"
+bio = "BIOLOGIE-ÉCOLOGIE"
+thea = "THÉÂTRE"
+cirq = "ARTS DU CIRQUE"
+engi = "SCIENCES-INGENIEUR"
+
+

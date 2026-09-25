@@ -4,6 +4,7 @@ import ast
 import copy
 from os import listdir, getcwd
 from os.path import isfile, join
+from constants import *
 fichier_travail = None
 
 def lire_csv(filepath, delimiter= " ", encoding = "latin-1"):
@@ -50,24 +51,50 @@ def eleve_par_spe():
 
     ## EXECUTION DE LA FONCTION REELLE
     path = "resultats_classe"
-    onlyfiles = [f for f in listdir(f"{getcwd()}\\{path}\\")]
-    union = []
-    for file in onlyfiles:
-        f = lire_csv(f"{path}/{file}")
-        union.append(f)
-    print(union)
+    
+    union = lire_csv("resultats_classe/brut.csv")
+    
+    
+    eleves_filtre= []
+    for eleve in union:
+        excluded = False
+        filtered_spe_found = False
+        for cle,spe in eleve.items():
+            if cle not in useless_domains_voeux:
+                if(spe in exclu_spe):
+                    excluded = True
+                    break
+                if(spe == optionsSpe[resultatSpe]):
+                    filtered_spe_found = True
+        if(excluded is False and filtered_spe_found):
+            eleves_filtre.append(eleve)
+        else:
+            print(f"EXCLUDED: {eleve}")
+    print(f"BEFORE EXCLUSION: {len(union)} \
+        AFTER EXCLUSION: {len(eleves_filtre)}")
+    fichiers_classes = []
+    eleves_et_moyennes = []
+    for eleve in eleves_filtre:
+        classe = "20" + retrouve_classe(eleve["Classe"])
+        fichier_eleve = []
+        if(classe not in fichiers_classes):
+            union = lire_csv(f"resultats_classe/{classe}.csv")
+            fichier_eleve = union["Nom"] #! FINISH THIS
+        for cle,spe in eleve.items():
+            if cle not in useless_domains_voeux:
+
+                
+            
    # bd = lire_csv("resultats_classe/")
 
-    
-        
+useless_domains = ["Nom", "Prenom", "Classe", "Moyenne"]
+useless_domains_voeux = ["INE", "Classe", "Nom", "Prenom", "Sexe"]
+exclu_spe = [arts,bio,cirq,thea,engi]
 def demande(options):
-    resultat = None
-    while resultat is None:
-        resultat = input("Reponse: ")
-        if ( resultat in options):
-            return resultat
-        else:
-            resultat = None
+    resultat = input("Reponse: ")
+    if ( resultat in options):
+        return resultat
+    return demande(options)
 
 def menu():
     print("Bonjour, bien venu sur la platforme de filtrage des eleves!")
@@ -82,21 +109,22 @@ optionsMenu = {
 "1" : ("Donner tous les eleves d'un spe specifie", eleve_par_spe ),
 "2" : "Nothing yet"
 }
-optionsSpe = {
-    "1" : "HGGSP",
-    "2" : "HLP",
-    "3" : "EPPCS",
-    "4" : "LLCER",
-    "5" : "SES",
-    "6" : "SVT",
-    "7" : "MATHS",
-    "8" : "NSI",
-    "9" : "PHYSIQUE-CHIMIE",
-    "10" : "ARTS-PLASTIQUES",
-    "11" : "BIOLOGIE-ÉCOLOGIE",
-    "12" : "THÉÂTRE",
-    "13" : "ARTS DU CIRQUE",
 
+
+optionsSpe = {
+    "1" : hggsp,
+    "2" : hlp,
+    "3" : eppcs,
+    "4" : llcer,
+    "5" : ses,
+    "6" : svt,
+    "7" : maths,
+    "8" : nsi,
+    "9" : pc,
+    "10" : arts,
+    "11" : bio,
+    "12" : thea,
+    "13" : cirq,
 }
 
 dico_spe = {
@@ -114,4 +142,8 @@ dico_spe = {
     "SCIENCES-INGENIEUR" : ["FRANCAIS"],
     "THÉÂTRE" : ["FRANCAIS"],
     "ARTS DU CIRQUE" : ["FRANCAIS"]}
+
+def retrouve_classe(classe: str):
+    if ("2NDE " in classe):
+        return classe[5]
 main()
