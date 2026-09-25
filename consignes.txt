@@ -1,0 +1,28 @@
+ratio_fg qui renvoie le nombre de filles et de garçons dans chaque spécialité ainsi que le pourcentage de filles (stocké dans un nouveau CSV ou un PDF)
+nb_eleve_triplette qui renvoie le nombre d'élèves par triplette (dans un CSV ou un PDF)
+eleve_par_spe qui, pour chacune des spécialités, renvoie un CSV avec la liste des élèves ou un PDF
+Un dictionnaire contenant les liens entre les différentes matières se trouve à l'intérieur du fichier .py — pour chaque spécialité, récupérer les moyennes en lien avec la spécialité pour chacun des élèves.
+
+Vous devez nettoyer le fichier des vœux des élèves ayant choisi des spécialités non disponibles dans le lycée.
+Vous devez ordonner les vœux des élèves qui souhaiteraient Maths/NSI ou NSI/Maths, qui devra être considéré comme la même chose.
+
+dico_spe = {
+    "HGGSP" : ["FRANCAIS", "MATHS", "HG"],
+    "HLP" : ["FRANCAIS", "MATHS","HG"],
+    "EPPCS" : ["FRANCAIS", "MATHS","SVT" , "SES", "EPS"],
+    "LLCER" : ["FRANCAIS", "MATHS","ANGLAIS"],
+    "SES" : ["FRANCAIS", "MATHS","SES"],
+    "SVT" : ["FRANCAIS", "MATHS","SVT"],
+    "MATHS" : ["FRANCAIS", "MATHS"],
+    "NSI" : ["FRANCAIS", "MATHS"],
+    "PHYSIQUE-CHIMIE" : ["FRANCAIS", "MATHS","PC"],
+    "ARTS-PLASTIQUES" : ["FRANCAIS"],
+    "BIOLOGIE-ÉCOLOGIE" : ["FRANCAIS"],
+    "SCIENCES-INGENIEUR" : ["FRANCAIS"],
+    "THÉÂTRE" : ["FRANCAIS"],
+    "ARTS DU CIRQUE" : ["FRANCAIS"]}
+
+
+
+    ###
+    RATIO sur les premiers qui on ete acceptes leurs veux, rejette
