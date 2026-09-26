@@ -1,3 +1,6 @@
+import os
+
+
 def creer_pdf_tableau1(nom_fichier, titre, data):
     from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer
     from reportlab.lib import colors
@@ -5,9 +8,14 @@ def creer_pdf_tableau1(nom_fichier, titre, data):
     from reportlab.lib.styles import getSampleStyleSheet
     from reportlab.lib.enums import TA_CENTER
 
+    #? Dossier de sortie, fonction modifie
+    dossier_exports = "exports"
+    os.makedirs(dossier_exports, exist_ok=True)
+    chemin_complet = os.path.join(dossier_exports, nom_fichier)
+    
     # Création du document
-    doc = SimpleDocTemplate(nom_fichier, pagesize=A4)
-
+    doc = SimpleDocTemplate(chemin_complet, pagesize=A4)
+    #? -------- Fin modification ---------
     elements = []
 
     # Styles
