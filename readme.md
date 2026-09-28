@@ -24,3 +24,6 @@ Si la programme ne deroule pas:
 
 - **No module named reportlab**: Voir le dossier "installation deps/" pour bien creer l'environnement necessaire.
 - **Une erreur de DIRECTORY NOT FOUND**: la programme n'etait pas teste sur Windows et il y a la possibilite que une changement de "/" en "\\" ou "//" est necessaire en stats.py ligne 103.
+
+
+(Projet sur github: https://github.com/Capitanull/CSV-Sorting)
